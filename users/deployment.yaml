@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-servive
+spec:
+  selector:
+    matchLabels:
+      app: user-service
+  replicas: 1
+  template: # template for pods
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      containers:
+        - name: user-service
+          image: ${REPOSITORY_TAG}
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: production-microservice
